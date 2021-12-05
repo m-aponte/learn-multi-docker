@@ -15,7 +15,7 @@ services:
       dockerfile: Dockerfile.dev
       context: ./nginx
     ports:
-      '3050:80'
+      - '3050:80'
   api:
     build:
       dockerfile: Dockerfile.dev
@@ -31,21 +31,21 @@ services:
       - PGDATABASE=postgres
       - PGPASSWORD=postgres_password
       - PGPORT=5432
-    client:
-      stdin_open: true
-      build: 
-        dockerfile: Dockerfile.dev
-        context: ./client
-      volumes:
-        - /usr/src/app/node_modules
-        - ./client:/usr/src/app
-    worker:
-      build:
-        dockerfile: Dockerfile.dev
-        context: ./worker
-      volumes:
-        - /usr/src/app/node_modules
-        - ./worker:/usr/src/app
-      environment:
-        - REDIS_HOST=redis
-        - REDIS_PORT=6379
+  client:
+    stdin_open: true
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /usr/src/app/node_modules
+      - ./client:/usr/src/app
+  worker:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./worker
+    volumes:
+      - /usr/src/app/node_modules
+      - ./worker:/usr/src/app
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
