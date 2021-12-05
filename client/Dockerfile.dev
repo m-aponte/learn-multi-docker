@@ -1,0 +1,12 @@
+FROM node:lts-alpine
+RUN mkdir -p /usr/src/app
+RUN chown -R node:node /usr/src/app
+WORKDIR '/usr/src/app'
+
+USER node
+
+COPY --chown=node:node ./package.json /usr/src/app
+RUN npm install
+COPY --chown=node:node ./ ./
+
+CMD ["npm", "run", "start"]
