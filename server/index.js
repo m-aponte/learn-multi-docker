@@ -18,8 +18,9 @@ const pgClient = new Pool({
   password: keys.pgPassword,
   port: keys.pgPort,
 });
-pgClient.on('connect', () => {
-  pgClient
+pgClient.on('connect', (client) => {
+  console.log('Postgres client is connecting to DB.');
+  client
     .query('CREATE TABLE IF NOT EXISTS values (number INT)')
     .catch((err) => console.log(err));
 });
@@ -66,5 +67,6 @@ app.post('/values', async (req, res) => {
 });
 
 app.listen(5000, (err) => {
-  console.log('Listening');
+  console.log('Postgres pool info', pgClient);
+  console.log('API Server is listening on 5000');
 });
