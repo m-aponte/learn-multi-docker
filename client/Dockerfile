@@ -11,5 +11,7 @@ COPY --chown=node:node ./ ./
 RUN npm run build
 
 FROM nginx
-EXPOSE 80
+EXPOSE 3000
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 CMD ["npm", "run", "start"]
