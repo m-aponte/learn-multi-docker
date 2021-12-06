@@ -5,7 +5,7 @@ WORKDIR '/usr/src/app'
 
 USER node
 
-COPY --chown=node:node ./package.json /usr/src/app
+COPY --chown=node:node ./package*.json /usr/src/app
 RUN npm install
 COPY --chown=node:node ./ ./
 RUN npm run build
