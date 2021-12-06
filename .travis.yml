@@ -4,13 +4,13 @@ services:
   - docker
 
 before_install:
-  - docker build -t maponte/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t mapon/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true maponte/react-test npm test
+  - docker run -e CI=true mapon/react-test npm test
 
 after_success:
-  - docker build -t maponte/learn-multi-client ./client
-  - docker build -t maponte/learn-multi-nginx ./nginx
-  - docker build -t maponte/learn-multi-server ./server
-  - docker build -t maponte/learn-multi-worker ./worker
+  - docker build -t mapon/learn-multi-client ./client
+  - docker build -t mapon/learn-multi-nginx ./nginx
+  - docker build -t mapon/learn-multi-server ./server
+  - docker build -t mapon/learn-multi-worker ./worker
