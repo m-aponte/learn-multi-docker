@@ -14,3 +14,10 @@ after_success:
   - docker build -t mapon/learn-multi-nginx ./nginx
   - docker build -t mapon/learn-multi-server ./server
   - docker build -t mapon/learn-multi-worker ./worker
+  # Log in to docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Push images built in this stage to prod repository
+  - docker push mapon/learn-multi-client
+  - docker push mapon/learn-multi-nginx
+  - docker push mapon/learn-multi-server
+  - docker push mapon/learn-multi-worker
