@@ -21,3 +21,15 @@ after_success:
   - docker push mapon/learn-multi-nginx
   - docker push mapon/learn-multi-server
   - docker push mapon/learn-multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: learn-multi-docker
+  env: Learnmultidocker-env
+  bucket_name: elasticbeanstalk-us-east-2-432502376638
+  bucket_path: learn-docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
